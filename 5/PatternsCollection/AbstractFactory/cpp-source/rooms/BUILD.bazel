@@ -1,0 +1,6 @@
+cc_library(
+    name = "rooms",
+    srcs = glob(["*.cpp"]),
+    hdrs = glob(["*.h"]),
+    visibility = ["//visibility:public"]
+)

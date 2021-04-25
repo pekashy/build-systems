@@ -1,0 +1,7 @@
+cc_library(
+    name = "serializers",
+    srcs = glob(["*.cpp"]),
+    hdrs = glob(["*.h"]),
+    deps = ["//PatternsCollection/AbstractFactory/cpp-source/rooms:rooms"],
+    visibility = ["//visibility:public"]
+)

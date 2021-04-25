@@ -1,0 +1,18 @@
+cc_binary(
+    name = "AbstractFactoryMain",
+    srcs = ["main.cpp"],
+    deps = [
+        "//PatternsCollection/AbstractFactory/cpp-source/factories:factories",
+        ],
+
+)
+
+cc_binary(
+    name = "AbstractFactoryMainSerializers",
+    srcs = ["main_serializer.cpp"],
+    deps = [
+        "//PatternsCollection/AbstractFactory/cpp-source/rooms:rooms",
+        "//PatternsCollection/AbstractFactory/cpp-source/factories:factories",
+        "//PatternsCollection/AbstractFactory/cpp-source/serializers:serializers",
+        ],
+)
