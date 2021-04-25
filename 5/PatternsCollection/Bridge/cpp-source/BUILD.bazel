@@ -1,0 +1,40 @@
+cc_library(
+    name = "axles",
+    srcs = glob(["axles/*.cpp"]),
+    hdrs = glob(["include/*Axle.h"]),
+    copts = ["-IPatternsCollection/Bridge/cpp-source/include"],
+    strip_include_prefix = "include",
+)
+
+cc_library(
+    name = "wheels",
+    srcs = glob(["wheels/*.cpp"]),
+    hdrs = ["include/PlaneWheel.h", "include/Gamepad.h", "include/SteeringWheel.h"],
+    copts = ["-IPatternsCollection/Bridge/cpp-source/include"],
+    strip_include_prefix = "include",
+    deps = [
+        ":axles"
+        ]
+)
+
+filegroup(
+    name = 'wheels_lib',
+    srcs = [':wheels'],
+    output_group = 'dynamic_library'
+)
+
+filegroup(
+    name = 'axles_lib',
+    srcs = [':axles'],
+    output_group = 'dynamic_library'
+)
+
+
+cc_binary(
+    name = "Bridge",
+    srcs = ["main.cpp"],
+    deps = [
+        ":axles",
+        ":wheels",
+        ],
+)
