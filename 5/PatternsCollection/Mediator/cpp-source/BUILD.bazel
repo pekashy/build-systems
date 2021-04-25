@@ -1,0 +1,36 @@
+cc_library(
+    name = "common",
+    srcs = glob(["Common/*.cpp"]),
+    hdrs = glob(["Common/*.h"]),
+    copts = ["-IPatternsCollection/Mediator/cpp-source/Common"]
+)
+
+
+
+cc_library(
+    name = "vehicles",
+    srcs = glob(["vehicles/*.cpp"]),
+    hdrs = glob(["vehicles/*.h"]),
+    copts = ["-IPatternsCollection/Mediator/cpp-source/vehicles"],
+    deps = [ ":common" ]
+
+)
+
+cc_library(
+    name = "dispatcher",
+    srcs = glob(["dispatcher/*.cpp"]),
+    hdrs = glob(["dispatcher/*.h"]),
+    copts = ["-IPatternsCollection/Mediator/cpp-source/dispatcher"],
+    deps = [ ":common", ":vehicles" ]
+)
+
+
+cc_binary(
+    name = "Mediator",
+    srcs = ["main.cpp"],
+    deps = [
+        ":vehicles",
+        ":dispatcher"
+        ],
+    linkopts = ["-lpthread"]
+)

@@ -1,0 +1,4 @@
+cc_binary(
+    name = "State",
+    srcs = glob(["*.cpp", "*.h", "states/*.h", "states/*.cpp"])
+)
