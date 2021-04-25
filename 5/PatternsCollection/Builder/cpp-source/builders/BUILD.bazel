@@ -1,0 +1,7 @@
+cc_library(
+    name = "builders",
+    srcs = glob(["*.cpp"]),
+    hdrs = glob(["*.h"]),
+    visibility = ["//visibility:public"],
+    deps = ["//PatternsCollection/Builder/cpp-source/builders/base:buildersbase"]
+)

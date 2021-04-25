@@ -1,0 +1,7 @@
+cc_binary(
+    name = "Builder",
+    srcs = glob(["*.cpp", "*.h"]),
+    deps = [
+        "//PatternsCollection/Builder/cpp-source/builders:builders"
+    ]
+)

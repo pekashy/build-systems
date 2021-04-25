@@ -1,0 +1,6 @@
+cc_library(
+    name = "buildersbase",
+    srcs = glob(["*.cpp"], ["base/*.cpp"]),
+    hdrs = glob(["*.h"], ["base/*.h"]),
+    visibility = ["//visibility:public"]
+)
