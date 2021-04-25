@@ -1,0 +1,22 @@
+cc_library(
+    name = "ration",
+    srcs = glob(["ration/*.cpp"]),
+    hdrs = glob(["include/*.h"]),
+    copts = ["-IPatternsCollection/Composite/cpp-source/include"],
+    strip_include_prefix = "include",
+)
+
+
+filegroup(
+    name = 'ration_lib',
+    srcs = [':ration'],
+    output_group = 'dynamic_library'
+)
+
+cc_binary(
+    name = "Composite",
+    srcs = ["main.cpp"],
+    deps = [
+        ":ration",
+        ]
+)

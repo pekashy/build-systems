@@ -1,7 +1,26 @@
-cc_binary(
-    name = "Builder",
-    srcs = glob(["*.cpp", "*.h"]),
+cc_library(
+    name = "chef",
+    srcs = ["Chef.cpp"],
+    hdrs = ["Chef.h"],
+    copts = ["-IPatternsCollection/Builder/cpp-source"],
+    visibility = ["//visibility:public"],
     deps = [
         "//PatternsCollection/Builder/cpp-source/builders:builders"
+        ]
+)
+
+filegroup(
+    name = 'chef_lib',
+    srcs = [':chef'],
+    output_group = 'dynamic_library'
+)
+
+
+cc_binary(
+    name = "Builder",
+    srcs = ["main.cpp"],
+    deps = [
+        "//PatternsCollection/Builder/cpp-source/builders:builders",
+        ":chef"
     ]
 )

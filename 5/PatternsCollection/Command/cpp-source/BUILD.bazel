@@ -1,0 +1,9 @@
+cc_binary(
+    name = "Command",
+    srcs = glob(["*.cpp", "*.h"]),
+    deps = [
+        "//PatternsCollection/Command/cpp-source/commands:commands",
+        "//PatternsCollection/Command/cpp-source/cookery:cookery",
+        ],
+    linkopts = ["-lpthread"]
+)

@@ -1,0 +1,34 @@
+cc_library(
+    name = "routes",
+    srcs = glob(["routes/*.cpp"]),
+    hdrs = glob(["routes/*.h"]),
+    visibility = ["//visibility:public"],
+    copts = ["-IPatternsCollection/FactoryMethod/cpp-source/routes"]
+)
+
+filegroup(
+    name = 'routes_lib',
+    srcs = [':routes'],
+    output_group = 'dynamic_library'
+)
+
+
+cc_library(
+    name = "routers",
+    srcs = glob(["routers/*.cpp"]),
+    hdrs = glob(["routers/*.h"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        ":routes"
+        ]
+)
+
+
+cc_binary(
+    name = "FactoryMetod",
+    srcs = ["main.cpp"],
+    deps = [
+        ":routes",
+        ":routers"
+        ]
+)

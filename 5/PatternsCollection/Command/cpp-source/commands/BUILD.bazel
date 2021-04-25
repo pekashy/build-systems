@@ -1,0 +1,9 @@
+cc_library(
+    name = "commands",
+    srcs = glob(["*.cpp"]),
+    hdrs = glob(["*.h"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//PatternsCollection/Command/cpp-source/cookery:cookery"
+    ]
+)

@@ -2,5 +2,12 @@ cc_library(
     name = "rooms",
     srcs = glob(["*.cpp"]),
     hdrs = glob(["*.h"]),
-    visibility = ["//visibility:public"]
+    copts = ["-IPatternsCollection/AbstractFactory/cpp-source/rooms"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = 'rooms_lib',
+    srcs = [':rooms'],
+    output_group = 'dynamic_library'
 )
