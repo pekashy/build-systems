@@ -19,5 +19,6 @@ target_link_libraries(MainLib buffer)
 
 install(TARGETS MainLib Main
         RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/bin
+        PUBLIC_HEADER DESTINATION ${PROJECT_SOURCE_DIR}/include 
         )
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/sysroot-glibc-linaro-2.25-2019.12-armv8l-linux-gnueabihf/lib DESTINATION ${PROJECT_SOURCE_DIR})
