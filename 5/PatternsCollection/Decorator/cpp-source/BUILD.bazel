@@ -1,0 +1,78 @@
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "make")
+
+package(default_visibility = ["//visibility:public"])
+
+cmake(
+    name='inicpp',
+    lib_source='@inicpp//:all',
+    out_shared_libs=['libinicpp.so'],
+    out_include_dir='include',
+    generate_args=["-DINICPP_BUILD_SHARED=ON"]
+)
+
+
+cmake(
+    name='tgbot',
+    lib_source='@tgbot//:all',
+    cache_entries={'-DCMAKE_INSTALL_PREFIX':'.'},
+    out_static_libs=['libTgBot.a'],
+    out_include_dir='include',
+)
+
+
+cmake(
+    name='doxygen',
+    lib_source='@doxygen//:all',
+    out_include_dir='include',
+    out_binaries=["doxygen"],
+    generate_args=["-G Unix Makefiles", ".."],
+    linkopts = ["-lpthread", "-lpthreads", "-localtime_s"],
+)
+
+
+cmake(
+    name='vmime',
+    lib_source='@vmime//:all',
+    cache_entries={
+                   'VMIME_HAVE_SASL_SUPPORT':'OFF',
+                   'VMIME_SENDMAIL_PATH':'.',
+                    },
+    out_include_dir='include',
+    out_binaries=["vmime"],
+    out_static_libs=['libvmime.a'],
+    out_shared_libs=['libvmime.so'],
+    linkopts = ["-pthread"],
+    deps = ["doxygen"]
+)
+
+
+
+cc_library(
+    name = "notifiers",
+    srcs = glob(["notifiers/*.cpp"]),
+    hdrs = glob(["include/*.h"]),
+    copts = ["-IPatternsCollection/Decorator/cpp-source/include"],
+    strip_include_prefix = "include",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":inicpp",
+        ":tgbot",
+        ":vmime"
+    ]
+)
+
+filegroup(
+    name = 'notifiers_lib',
+    srcs = [':notifiers'],
+    output_group = 'dynamic_library'
+)
+
+cc_binary(
+    name = "Decorator",
+    srcs = ["main.cpp"],
+    deps = [
+        ":notifiers",
+        ":tgbot"
+        ]
+)
